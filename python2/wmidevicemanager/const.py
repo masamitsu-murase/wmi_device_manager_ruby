@@ -1,7 +1,7 @@
 
 # Get-PnpDevice | Get-PnpDeviceProperty | ft -Property KeyName -AutoSize | Out-String -Width 4096
 
-Bluetooth = set((
+Bluetooth = {
 "RadioAddress",
 "RadioHciRevision",
 "RadioHciVendorFeatures",
@@ -12,9 +12,9 @@ Bluetooth = set((
 "RadioLmpSupportedFeatures",
 "RadioLmpVersion",
 "RadioManufacturer"
-))
+}
 
-Device = set((
+Device = {
 "AdditionalSoftwareRequested",
 "Address",
 "BaseContainerId",
@@ -93,25 +93,25 @@ Device = set((
 "UINumber",
 "UINumberDescFormat",
 "UpperFilters"
-))
+}
 
-DeviceContainer = set((
+DeviceContainer = {
 "Category",
 "HasProblem",
 "IsDefaultDevice",
 "IsNetworkDevice",
 "IsSharedDevice",
 "IsShowInDisconnectedState"
-))
+}
 
-DrvPkg = set((
+DrvPkg = {
 "BrandingIcon",
 "Icon",
 "Model",
 "VendorWebSite"
-))
+}
 
-PciDevice = set((
+PciDevice = {
 "AcsCapabilityRegister",
 "AcsCompatibleUpHierarchy",
 "AcsSupport",
@@ -144,9 +144,9 @@ PciDevice = set((
 "SubClass",
 "Uncorrectable_Error_Mask",
 "Uncorrectable_Error_Severity"
-))
+}
 
-PciRootBus = set((
+PciRootBus = {
 "ASPMSupport",
 "ClockPowerManagementSupport",
 "ExtendedConfigAvailable",
@@ -161,4 +161,4 @@ PciRootBus = set((
 "SecondaryInterface",
 "SHPCNativeHotPlugControl",
 "SystemMsiSupport"
-))
+}

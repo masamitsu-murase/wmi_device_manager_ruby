@@ -48,6 +48,12 @@ class Win32PnpEntity(object):
             super(Win32PnpEntity, self).__setattr__(key, value)
 
     def __getattr__(self, key):
+        if key in {"_properties_list", "_methods_list", "_wmi_object", "_parent", "_children"}:
+            if key in self.__dict__:
+                return self.__dict__[key]
+            else:
+                raise AttributeError
+
         if key in self._properties_list:
             return wrap_raw_wmi_object(self._wmi_object.Properties_[key].Value)
         elif key in self._methods_list:
@@ -72,7 +78,10 @@ class Win32PnpEntity(object):
                     return None
                 else:
                     return prop_value.Data
-            return self.__dict__[key]
+            if key in self.__dict__:
+                return self.__dict__[key]
+            else:
+                raise AttributeError
 
     def _wrap_method(self, method_name):
         def wmi_method(self, *args, **kwargs):
