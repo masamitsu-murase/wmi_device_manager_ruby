@@ -1,10 +1,17 @@
 
 import types
 
-import comtypes
-import comtypes.client as cc
-
 from . import const
+
+def wrap_raw_wmi_object(obj):
+    if type(obj) == tuple:
+        return tuple(wrap_raw_wmi_object(x) for x in obj)
+    elif type(obj) == list:
+        return [wrap_raw_wmi_object(x) for x in obj]
+    elif hasattr(obj, "Properties_") and hasattr(obj, "Methods_"):
+        return Win32PnpEntity(obj)
+    else:
+        return obj
 
 class Win32PnpEntity(object):
     def __init__(self, wmi_object):
@@ -42,7 +49,7 @@ class Win32PnpEntity(object):
 
     def __getattr__(self, key):
         if key in self._properties_list:
-            return self._wmi_object.Properties_[key].Value
+            return wrap_raw_wmi_object(self._wmi_object.Properties_[key].Value)
         elif key in self._methods_list:
             return self._wrap_method(key)
         else:
