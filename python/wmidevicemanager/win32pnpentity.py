@@ -65,7 +65,7 @@ class Win32PnpEntity(object):
                     prop_value = self.GetDeviceProperties(["DEVPKEY_" + key]).deviceProperties[0]
                     break
                 elif key.startswith("DEVPKEY_" + name + "_") and key[8 + len(name) + 1:] in values:
-                    prop_value = self.GetDeviceProperties([key]).deviceProperties()
+                    prop_value = self.GetDeviceProperties([key]).deviceProperties[0]
                     break
             if prop_value:
                 if prop_value.Type == 0:
@@ -90,4 +90,3 @@ class Win32PnpEntity(object):
                 params = None
             return wrap_raw_wmi_object(self._wmi_object.ExecMethod_(method_name, params))
         return types.MethodType(wmi_method, self, Win32PnpEntity)
-
