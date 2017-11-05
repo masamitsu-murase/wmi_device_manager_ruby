@@ -24,7 +24,7 @@ class WmiDeviceManager(object):
     def construct_device_tree(self):
         device_hash = {}
         for device in self:
-            device_hash[device.PNPDeviceID.upper()] = {
+            device_hash[device.DeviceID.upper()] = {
                 "device": device,
                 "parent": None,
                 "children": []
