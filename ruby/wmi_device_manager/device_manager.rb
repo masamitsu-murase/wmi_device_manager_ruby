@@ -14,6 +14,8 @@ module WmiDeviceManager
             end
         end
 
+        attr_reader :device_list
+
         def scan_derive_tree
             @device_list = @wmi.ExecQuery("SELECT * from Win32_PnPEntity").to_enum(:each).map do |i|
                 next WmiDeviceManager.wrap_raw_wmi_object(i)
