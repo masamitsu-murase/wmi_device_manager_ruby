@@ -11,6 +11,16 @@ module WmiDeviceManager
             @methods_list = wmi_object.Methods_.to_enum(:each).map{ |i| i.Name }
         end
 
+        def parent
+            raise "Not constructed yet" if @children == nil
+            return @parent
+        end
+
+        def children
+            raise "Not constructed yet" if @children == nil
+            return @children
+        end
+
         def set_relationship(parent, children)
             @parent = parent
             @children = children
