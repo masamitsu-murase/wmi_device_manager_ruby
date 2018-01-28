@@ -33,7 +33,7 @@ module WmiDeviceManager
             elsif @methods_list.include? name
                 return call_method(name, args)
             else
-                const_list = ["Bluetooth", "Device", "DeviceContainer", "DrvPkg", "PciDevice", "PciRootBus" ]
+                const_list = DEVPKEY_LIST
                 prop_value = nil
                 const_list.each do |const_name|
                     const_value = WmiDeviceManager.const_get(const_name)

@@ -59,9 +59,7 @@ class Win32PnpEntity(object):
         elif key in self._methods_list:
             return self._wrap_method(key)
         else:
-            pair = (("Bluetooth", const.Bluetooth), ("Device", const.Device),
-                ("DeviceContainer", const.DeviceContainer), ("DrvPkg", const.DrvPkg),
-                ("PciDevice", const.PciDevice), ("PciRootBus", const.PciRootBus))
+            pair = const.DEVPKEY_LIST
             prop_value = None
             for name, values in pair:
                 if key in values:
