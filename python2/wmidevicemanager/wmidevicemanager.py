@@ -12,6 +12,11 @@ class WmiDeviceManager(object):
         if construct_device_tree:
             self.construct_device_tree()
 
+    @staticmethod
+    def yellow_bang_devices(construct_device_tree=True):
+        dvm = WmiDeviceManager(construct_device_tree)
+        return [x for x in dvm if x.HasProblem]
+
     @property
     def root(self):
         if self._root is None:
