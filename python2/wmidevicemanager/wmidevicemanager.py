@@ -4,6 +4,10 @@ import comtypes.client as cc
 
 from .win32pnpentity import wrap_raw_wmi_object
 
+def yellow_bang_devices(construct_device_tree=True):
+    dvm = WmiDeviceManager(construct_device_tree)
+    return [x for x in dvm if x.HasProblem]
+
 class WmiDeviceManager(object):
     def __init__(self, construct_device_tree=True):
         self._wmi = cc.CoGetObject(r"winmgmts:\\.\root\cimv2")
@@ -11,11 +15,6 @@ class WmiDeviceManager(object):
         self.scan_device_tree()
         if construct_device_tree:
             self.construct_device_tree()
-
-    @staticmethod
-    def yellow_bang_devices(construct_device_tree=True):
-        dvm = WmiDeviceManager(construct_device_tree)
-        return [x for x in dvm if x.HasProblem]
 
     @property
     def root(self):
