@@ -613,10 +613,6 @@ Imaging = {
   "Port"
 }
 
-IndirectDisplay = {
-  ""
-}
-
 InfraCast = {
   "ChallengeAep",
   "DevnodeAep"
@@ -660,10 +656,6 @@ Mbae = {
 
 MTPBTH = {
   "IsConnected_Private"
-}
-
-NAME = {
-  ""
 }
 
 NFP = {
@@ -762,10 +754,6 @@ Storage = {
   "Portable",
   "Removable_Media",
   "System_Critical"
-}
-
-TSRedirectedDeviceSharedAccess = {
-  ""
 }
 
 TSUSB = {
@@ -897,14 +885,12 @@ DEVPKEY_LIST = (
   # ("FirmwareResource", FirmwareResource),
   ("HdAudBus", HdAudBus),
   ("Imaging", Imaging),
-  ("IndirectDisplay", IndirectDisplay),
   ("InfraCast", InfraCast),
   ("IoT", IoT),
   ("IPP", IPP),
   ("KsAudio", KsAudio),
   ("Mbae", Mbae),
   ("MTPBTH", MTPBTH),
-  ("NAME", NAME),
   ("NFP", NFP),
   # ("PciDevice", PciDevice),
   # ("PciRootBus", PciRootBus),
@@ -913,7 +899,6 @@ DEVPKEY_LIST = (
   ("Smartcard", Smartcard),
   ("SSDP", SSDP),
   ("Storage", Storage),
-  ("TSRedirectedDeviceSharedAccess", TSRedirectedDeviceSharedAccess),
   ("TSUSB", TSUSB),
   ("UPNP", UPNP),
   ("User", User),
