@@ -1,4 +1,3 @@
 
-from .wmidevicemanager import WmiDeviceManager
-from .wmidevicemanager import yellow_bang_devices
+from .wmidevicemanager import WmiDeviceManager, yellow_bang_devices, find_device
 from .win32pnpentity import Win32PnpEntity
