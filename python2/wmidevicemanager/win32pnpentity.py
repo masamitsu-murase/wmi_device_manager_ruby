@@ -18,8 +18,8 @@ class Win32PnpEntity(object):
         self._wmi_object = wmi_object
         self._properties_list = set(x.Name for x in wmi_object.Properties_)
         self._methods_list = set(x.Name for x in wmi_object.Methods_)
-        self._parent = None
-        self._children = None
+        self._parent = False    # Special value for "not initialized"
+        self._children = False  # Special value for "not initialized"
 
     @property
     def raw_object(self):
@@ -27,14 +27,24 @@ class Win32PnpEntity(object):
 
     @property
     def parent(self):
-        if self._children is None:
-            raise Exception("Not constructed yet.")
+        if self._parent == False:
+            parent = self.Device_Parent
+            if parent is None or parent == "":
+                self._parent = None
+            else:
+                from .wmidevicemanager import find_device
+                self._parent = find_device(parent)
         return self._parent
 
     @property
     def children(self):
-        if self._children is None:
-            raise Exception("Not constructed yet.")
+        if self._children == False:
+            children = self.Device_Children
+            if children is None or len(children) == 0:
+                self._children = ()
+            else:
+                from .wmidevicemanager import find_device
+                self._children = tuple(map(lambda x: find_device(x), children))
         return self._children
 
     def set_relationship(self, parent, children):
