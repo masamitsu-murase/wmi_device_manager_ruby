@@ -11,9 +11,9 @@ def _wmi_object():
         __wmi_object = cc.CoGetObject(r"winmgmts:\\.\root\cimv2")
     return __wmi_object
 
-def yellow_bang_devices(construct_device_tree=True):
-    dvm = WmiDeviceManager(construct_device_tree)
-    return [x for x in dvm if x.HasProblem]
+def yellow_bang_devices():
+    devices = _wmi_object().ExecQuery("SELECT * from Win32_PnPEntity where ConfigManagerErrorCode <> 0")
+    return tuple(wrap_raw_wmi_object(x) for x in devices)
 
 def find_device(device_id):
     device_id = device_id.replace("\\", "\\\\")
