@@ -4,13 +4,27 @@ import comtypes.client as cc
 
 from .win32pnpentity import wrap_raw_wmi_object
 
+__wmi_object = None
+def _wmi_object():
+    global __wmi_object
+    if __wmi_object is None:
+        __wmi_object = cc.CoGetObject(r"winmgmts:\\.\root\cimv2")
+    return __wmi_object
+
 def yellow_bang_devices(construct_device_tree=True):
     dvm = WmiDeviceManager(construct_device_tree)
     return [x for x in dvm if x.HasProblem]
 
+def find_device(device_id):
+    device_id = device_id.replace("\\", "\\\\")
+    devices = _wmi_object().ExecQuery("SELECT * from Win32_PnPEntity where DeviceID = '%s'" % device_id)
+    device = next(iter(devices), None)
+    if device is None:
+        return None
+    return wrap_raw_wmi_object(device)
+
 class WmiDeviceManager(object):
     def __init__(self, construct_device_tree=True):
-        self._wmi = cc.CoGetObject(r"winmgmts:\\.\root\cimv2")
         self._root = None
         self.scan_device_tree()
         if construct_device_tree:
@@ -23,7 +37,7 @@ class WmiDeviceManager(object):
         return self._root
 
     def scan_device_tree(self):
-        self._device_list = tuple(wrap_raw_wmi_object(i) for i in self._wmi.ExecQuery("SELECT * from Win32_PnPEntity"))
+        self._device_list = tuple(wrap_raw_wmi_object(i) for i in _wmi_object().ExecQuery("SELECT * from Win32_PnPEntity"))
 
     def construct_device_tree(self):
         device_hash = {}
