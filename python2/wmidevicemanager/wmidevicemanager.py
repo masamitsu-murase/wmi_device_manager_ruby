@@ -15,10 +15,13 @@ def yellow_bang_devices():
     devices = _wmi_object().ExecQuery("SELECT * from Win32_PnPEntity where ConfigManagerErrorCode <> 0")
     return tuple(wrap_raw_wmi_object(x) for x in devices)
 
-def find_device(device_id):
+def _find_raw_device(device_id):
     device_id = device_id.replace("\\", "\\\\")
     devices = _wmi_object().ExecQuery("SELECT * from Win32_PnPEntity where DeviceID = '%s'" % device_id)
-    device = next(iter(devices), None)
+    return next(iter(devices), None)
+
+def find_device(device_id):
+    device = _find_raw_device(device_id)
     if device is None:
         return None
     return wrap_raw_wmi_object(device)
