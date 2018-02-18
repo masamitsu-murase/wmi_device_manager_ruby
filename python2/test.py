@@ -14,6 +14,11 @@ cc.gen_dir = None
 g.__verbose__ = False
 
 class WmiTest(unittest.TestCase):
+    def test_list_all_devices(self):
+        w = wmi.WmiDeviceManager(False)
+        for i in w:
+            print(i.DeviceID)
+
     def test_root_device(self):
         w = wmi.WmiDeviceManager()
         self.assertIsNotNone(w.root.DeviceID)
