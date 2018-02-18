@@ -55,7 +55,7 @@ class WmiTest(unittest.TestCase):
     def test_find(self):
         dev = wmi.find_device(r"HTREE\ROOT\0")
         self.assertIsNotNone(dev)
-        if not self._has_parent:
+        if self._has_parent:
             self.assertIsNone(dev.parent)
 
     def test_pickle(self):
