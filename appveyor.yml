@@ -1,0 +1,4 @@
+build: off
+test_script:
+  - python2\python.exe python2/test.py
+deploy: off
