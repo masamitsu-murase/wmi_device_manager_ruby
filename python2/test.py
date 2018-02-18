@@ -58,5 +58,6 @@ class WmiTest(unittest.TestCase):
         ybd = wmi.yellow_bang_devices()
         self.assertEqual(len(ybd), 0)
 
+
 if __name__ == "__main__":
     unittest.main()
