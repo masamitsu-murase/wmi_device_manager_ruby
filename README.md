@@ -1,7 +1,7 @@
 
 # WMI Device Manager
 
-[![Build status](https://ci.appveyor.com/api/projects/status/5n4gt33gmd9clo0m/branch/master?svg=true)](https://ci.appveyor.com/project/masamitsu-murase/pausable-unittest/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/ktrn3q6nkx9dvdwd?svg=true)](https://ci.appveyor.com/project/masamitsu-murase/wmi-device-manager)
 
 This is a library to get information in device manager on Windows10 based on WMI.
 
