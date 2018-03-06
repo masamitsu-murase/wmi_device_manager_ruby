@@ -4,5 +4,6 @@ image:
   - Visual Studio 2017
 build: off
 test_script:
+  - C:\Ruby23\bin\ruby.exe python2/download_python.rb python.exe
   - python2\python.exe python2/test.py
 deploy: off
