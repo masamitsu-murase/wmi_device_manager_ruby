@@ -16,25 +16,55 @@ def wrap_raw_wmi_object(obj):
 class Win32PnpEntity(object):
     def __init__(self, wmi_object):
         self._wmi_object = wmi_object
+        self._device_id = None
         self._properties_list = set(x.Name for x in wmi_object.Properties_)
         self._methods_list = set(x.Name for x in wmi_object.Methods_)
-        self._parent = None
-        self._children = None
+        self._parent = False    # Special value for "not initialized"
+        self._children = False  # Special value for "not initialized"
+
+        if wmi_object is not None and "DeviceID" in self._properties_list:
+            self._device_id = wmi_object.Properties_["DeviceID"].Value
+
+    def __getstate__(self):
+        state = {
+            "_wmi_object": None,
+            "_device_id": self._device_id,
+            "_properties_list": self._properties_list,
+            "_methods_list": self._methods_list,
+            "_parent": self._parent,
+            "_children": self._children
+        }
+        if state["_device_id"] is None:
+            state["_device_id"] = self._wmi_object.Properties_["DeviceID"].Value
+        return state
 
     @property
     def raw_object(self):
+        if self._wmi_object is None and self._device_id is not None:
+            from .wmidevicemanager import _find_raw_device
+            self._wmi_object = _find_raw_device(self._device_id)
         return self._wmi_object
 
     @property
     def parent(self):
-        if self._children is None:
-            raise Exception("Not constructed yet.")
+        if self._parent == False:
+            parent = self.Device_Parent
+            if parent is None or parent == "":
+                self._parent = None
+            else:
+                from .wmidevicemanager import find_device
+                self._parent = find_device(parent)
         return self._parent
 
     @property
     def children(self):
-        if self._children is None:
-            raise Exception("Not constructed yet.")
+        if self._children == False:
+            children = self.Device_Children
+            if children is None or len(children) == 0:
+                self._children = ()
+            else:
+                from .wmidevicemanager import find_device
+                self._children = tuple(map(lambda x: find_device(x), children))
         return self._children
 
     def set_relationship(self, parent, children):
@@ -43,19 +73,19 @@ class Win32PnpEntity(object):
 
     def __setattr__(self, key, value):
         if hasattr(self, "_properties_list") and key in self._properties_list:
-            self._wmi_object.Properties_[key].Value = value
+            self.raw_object.Properties_[key].Value = value
         else:
             super(Win32PnpEntity, self).__setattr__(key, value)
 
     def __getattr__(self, key):
-        if key in {"_properties_list", "_methods_list", "_wmi_object", "_parent", "_children"}:
+        if key in {"_properties_list", "_methods_list", "_wmi_object", "_device_id", "_parent", "_children"}:
             if key in self.__dict__:
                 return self.__dict__[key]
             else:
                 raise AttributeError
 
         if key in self._properties_list:
-            return wrap_raw_wmi_object(self._wmi_object.Properties_[key].Value)
+            return wrap_raw_wmi_object(self.raw_object.Properties_[key].Value)
         elif key in self._methods_list:
             return self._wrap_method(key)
         else:
@@ -83,7 +113,7 @@ class Win32PnpEntity(object):
 
     def _wrap_method(self, method_name):
         def wmi_method(self, *args, **kwargs):
-            in_parameters = self._wmi_object.Methods_[method_name].inParameters
+            in_parameters = self.raw_object.Methods_[method_name].inParameters
             if in_parameters:
                 params = in_parameters.SpawnInstance_()
                 for param in params.Properties_:
@@ -95,5 +125,5 @@ class Win32PnpEntity(object):
                         param.Value = kwargs[name]
             else:
                 params = None
-            return wrap_raw_wmi_object(self._wmi_object.ExecMethod_(method_name, params))
-        return types.MethodType(wmi_method, self)
+            return wrap_raw_wmi_object(self.raw_object.ExecMethod_(method_name, params))
+        return types.MethodType(wmi_method, self, Win32PnpEntity)
