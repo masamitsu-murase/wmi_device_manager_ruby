@@ -4,10 +4,10 @@ image:
   - Visual Studio 2017
 build: off
 test_script:
-  - C:\Ruby23\bin\ruby.exe python2/download_python.rb python.exe 2
-  - python2\python.exe python2/test.py
-  - python2\python.exe -c "import sys; print(sys.version)"
-  - C:\Ruby23\bin\ruby.exe python3/download_python.rb python.exe 3
-  - python3\python.exe -c "import sys; print(sys.version)"
-  - python3\python.exe python3/test.py
+  - C:\Ruby23\bin\ruby.exe python/download_python.rb python.exe 2
+  - python\python.exe python/test.py
+  - python\python.exe -c "import sys; print(sys.version)"
+  - C:\Ruby23\bin\ruby.exe python/download_python.rb python.exe 3
+  - python\python.exe python/test.py
+  - python\python.exe -c "import sys; print(sys.version)"
 deploy: off
