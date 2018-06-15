@@ -40,7 +40,9 @@ def main(python_exe_name, python_version)
 
     puts "Downloading #{python_exe_name}..."
     res = get(exe_url, false, { "Accept" => "application/octet-stream" })
-    File.binwrite(python_exe_name, res.body.b)
+    Dir.chdir(__dir__) do
+        File.binwrite(python_exe_name, res.body.b)
+    end
 end
 
 main(ARGV[0], ARGV[1])
