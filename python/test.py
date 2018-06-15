@@ -45,7 +45,7 @@ class WmiTest(unittest.TestCase):
                 i.Device_BiosDeviceName
                 i.DEVPKEY_Device_BiosDeviceName
                 loc = i.Device_LocationInfo
-                if re.search(r"PCI バス", loc) or re.search(r"PCI Bus", loc):
+                if re.search(u"PCI バス", loc) or re.search(r"PCI Bus", loc):
                     if first_pci_device is None:
                         first_pci_device = i
             except:

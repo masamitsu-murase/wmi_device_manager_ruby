@@ -1,5 +1,5 @@
 
-import comtypes
+import sys
 import comtypes.client as cc
 
 from .win32pnpentity import wrap_raw_wmi_object
@@ -11,20 +11,30 @@ def _wmi_object():
         __wmi_object = cc.CoGetObject(r"winmgmts:\\.\root\cimv2")
     return __wmi_object
 
+
 def yellow_bang_devices():
     devices = _wmi_object().ExecQuery("SELECT * from Win32_PnPEntity where ConfigManagerErrorCode <> 0")
     return tuple(wrap_raw_wmi_object(x) for x in devices)
+
 
 def _find_raw_device(device_id):
     device_id = device_id.replace("\\", "\\\\")
     devices = _wmi_object().ExecQuery("SELECT * from Win32_PnPEntity where DeviceID = '%s'" % device_id)
     return next(iter(devices), None)
 
+
 def find_device(device_id):
     device = _find_raw_device(device_id)
     if device is None:
         return None
     return wrap_raw_wmi_object(device)
+
+
+if sys.version_info[0] == 2:
+    _dict_values = dict.itervalues
+else:
+    _dict_values = dict.values
+
 
 class WmiDeviceManager(object):
     def __init__(self, construct_device_tree=True):
@@ -50,7 +60,7 @@ class WmiDeviceManager(object):
                 "parent": None,
                 "children": []
             }
-        for value in device_hash.values():
+        for value in _dict_values(device_hash):
             parent_id = value["device"].Parent
             if parent_id is None:
                 self._root = value["device"]
@@ -59,7 +69,7 @@ class WmiDeviceManager(object):
                 if parent:
                     parent["children"].append(value["device"])
                     value["parent"] = parent["device"]
-        for value in device_hash.values():
+        for value in _dict_values(device_hash):
             value["device"].set_relationship(value["parent"], value["children"])
 
     def __iter__(self):
