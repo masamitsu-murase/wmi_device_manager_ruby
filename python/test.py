@@ -32,7 +32,6 @@ class WmiTest(unittest.TestCase):
             w = wmi.WmiDeviceManager()
             self.assertIsNotNone(w.root.DeviceID)
 
-    @unittest.skipIf(os.environ.get("APPVEYOR", False), "AppVeyor does not have PCI device.")
     def test_pci_device(self):
         if not self._has_parent:
             return

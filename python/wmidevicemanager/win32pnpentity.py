@@ -1,7 +1,16 @@
 
+import sys
 import types
 
 from . import const
+
+
+def _method_type(method, self, klass):
+    if sys.version_info.major == 2:
+        return types.MethodType(method, self, Win32PnpEntity)
+    else:
+        return types.MethodType(method, self)
+
 
 def wrap_raw_wmi_object(obj):
     if type(obj) == tuple:
@@ -12,6 +21,7 @@ def wrap_raw_wmi_object(obj):
         return Win32PnpEntity(obj)
     else:
         return obj
+
 
 class Win32PnpEntity(object):
     def __init__(self, wmi_object):
@@ -126,4 +136,4 @@ class Win32PnpEntity(object):
             else:
                 params = None
             return wrap_raw_wmi_object(self.raw_object.ExecMethod_(method_name, params))
-        return types.MethodType(wmi_method, self, Win32PnpEntity)
+        return _method_type(wmi_method, self, Win32PnpEntity)
