@@ -1,6 +1,7 @@
 
 # WMI Device Manager
 
+[![Build Status](https://dev.azure.com/masamitsu-murase/wmi_device_manager/_apis/build/status/masamitsu-murase.wmi_device_manager?branchName=master)](https://dev.azure.com/masamitsu-murase/wmi_device_manager/_build/latest?definitionId=4&branchName=master)
 [![Build status](https://ci.appveyor.com/api/projects/status/ktrn3q6nkx9dvdwd?svg=true)](https://ci.appveyor.com/project/masamitsu-murase/wmi-device-manager)
 
 This is a library to get information in device manager on Windows10 based on WMI.
@@ -10,7 +11,7 @@ For example, "BIOS Device Name", "Driver INF Path" and so on.
 
 ## Library for Python
 
-Use files in `python2` directory or `python3` directory based on your python engine.
+Use files in `python` directory.
 
 You need to install `comtypes` library.
 
