@@ -1,6 +1,5 @@
 # coding: utf-8
 
-import comtypes
 import comtypes.client as cc
 import comtypes.client._generate as g
 import wmidevicemanager as wmi
@@ -14,6 +13,7 @@ import platform
 cc.gen_dir = None
 # Suppress debug messages
 g.__verbose__ = False
+
 
 class WmiTest(unittest.TestCase):
     def setUp(self):
@@ -77,6 +77,7 @@ class WmiTest(unittest.TestCase):
     def test_yellow_bang_devices(self):
         ybd = wmi.yellow_bang_devices()
         self.assertEqual(len(ybd), 0)
+
 
 if __name__ == "__main__":
     unittest.main()
