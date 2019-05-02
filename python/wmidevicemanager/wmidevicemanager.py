@@ -43,6 +43,12 @@ class WmiDeviceManager(object):
         if construct_device_tree:
             self.construct_device_tree()
 
+    def find(self, func):
+        for item in self:
+            if func(item):
+                return item
+        return None
+
     @property
     def root(self):
         if self._root is None:
