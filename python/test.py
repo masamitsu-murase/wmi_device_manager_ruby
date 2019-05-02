@@ -25,7 +25,11 @@ class WmiTest(unittest.TestCase):
     def test_list_all_devices(self):
         w = wmi.WmiDeviceManager(False)
         for i in w:
-            print(i.DeviceID)
+            try:
+                print(i.DeviceID)
+                print(i.BiosDeviceName)
+            except:
+                pass
 
     def test_root_device(self):
         if self._has_parent:
