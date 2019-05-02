@@ -49,6 +49,18 @@ class WmiDeviceManager(object):
                 return item
         return None
 
+    def find_by(self, key, value):
+        for item in self:
+            if getattr(item, key) == value:
+                return item
+        return None
+
+    def select(self, func):
+        return tuple(item for item in self if func(item))
+
+    def select_by(self, key, value):
+        return tuple(item for item in self if getattr(item, key) == value)
+
     @property
     def root(self):
         if self._root is None:
