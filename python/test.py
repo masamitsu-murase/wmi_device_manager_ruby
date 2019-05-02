@@ -82,7 +82,7 @@ class WmiTest(unittest.TestCase):
         ybd = wmi.yellow_bang_devices()
         self.assertEqual(len(ybd), 0)
 
-    def test_find(self):
+    def test_wmi_find(self):
         wdm = wmi.WmiDeviceManager(False)
         if os.environ.get("APPVEYOR", False):
             device_name = r"\_SB.VMOD"
