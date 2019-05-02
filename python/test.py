@@ -25,7 +25,11 @@ class WmiTest(unittest.TestCase):
     def test_list_all_devices(self):
         w = wmi.WmiDeviceManager(False)
         for i in w:
-            print(i.DeviceID)
+            try:
+                print(i.DeviceID)
+                print(i.BiosDeviceName)
+            except:
+                pass
 
     def test_root_device(self):
         if self._has_parent:
@@ -77,6 +81,22 @@ class WmiTest(unittest.TestCase):
     def test_yellow_bang_devices(self):
         ybd = wmi.yellow_bang_devices()
         self.assertEqual(len(ybd), 0)
+
+    def test_wmi_find(self):
+        wdm = wmi.WmiDeviceManager(False)
+        if os.environ.get("APPVEYOR", False):
+            device_name = r"\_SB.VMOD"
+        else:
+            device_name = r"\_SB.PCI0"
+        dev1 = wdm.find(lambda item: item.BiosDeviceName == device_name)
+        dev_list1 = wdm.select(lambda item: (item.BiosDeviceName or "").startswith(r"\_SB."))
+        self.assertIn(dev1, dev_list1)
+
+        dev2 = wdm.find_by("BiosDeviceName", device_name)
+        dev_list2 = wdm.select_by("BiosDeviceName", device_name)
+        self.assertIn(dev2, dev_list2)
+
+        self.assertIs(dev1, dev2)
 
 
 if __name__ == "__main__":
