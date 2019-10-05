@@ -1,10 +1,8 @@
 
-require("set")
-
 module WmiDeviceManager
 # strings -u -nobanner -n 8 cimwin32.dll | grep ^DEVPKEY
  
-Aep = Set[
+Aep = [
   "AepId",
   "AssociationRetryCount",
   "Category",
@@ -34,7 +32,7 @@ Aep = Set[
   "SignalStrength"
 ]
 
-AepContainer = Set[
+AepContainer = [
   "Categories",
   "Children",
   "ContainerId",
@@ -62,7 +60,7 @@ AepContainer = Set[
   "SupportsVideo"
 ]
 
-AepService = Set[
+AepService = [
   "AepId",
   "Category",
   "ContainerId",
@@ -76,7 +74,7 @@ AepService = Set[
   "ServiceId"
 ]
 
-Bluetooth = Set[
+Bluetooth = [
   "AepQuery_IssueInquiry",
   "AepQuery_LE_ActiveScanning",
   "AepQuery_LE_ScanInterval",
@@ -127,7 +125,7 @@ Bluetooth = Set[
   "ServiceGUID"
 ]
 
-BluetoothLE = Set[
+BluetoothLE = [
   "AddressType",
   "Advertisement",
   "Appearance",
@@ -138,11 +136,11 @@ BluetoothLE = Set[
   "ScanResponse"
 ]
 
-Bthhfenum = Set[
+Bthhfenum = [
   "SupportsRemoteVolume"
 ]
 
-DasParam = Set[
+DasParam = [
   "AepStoreOnly",
   "DiscoverOnPublicNetwork",
   "PassiveScanning",
@@ -151,7 +149,7 @@ DasParam = Set[
   "X"
 ]
 
-Device = Set[
+Device = [
   "AdditionalSoftwareRequested",
   "Address",
   "AvailableTime",
@@ -311,7 +309,7 @@ Device = Set[
   "UserSelectedDriverInstalled"
 ]
 
-DeviceClass = Set[
+DeviceClass = [
   "BootCritical",
   "Characteristics",
   "ClassCoInstallers",
@@ -350,7 +348,7 @@ DeviceClass = Set[
   "UpperFilters"
 ]
 
-DeviceContainer = Set[
+DeviceContainer = [
   "Address",
   "AlwaysShowDeviceAsConnected",
   "AssociationArray",
@@ -426,16 +424,16 @@ DeviceContainer = Set[
   "WindowsHardwareLogoCertified"
 ]
 
-DeviceDisplay = Set[
+DeviceDisplay = [
   "UserLastAccessTime"
 ]
 
-DeviceId = Set[
+DeviceId = [
   "DriverInfMatches",
   "DriverInfNames"
 ]
 
-DeviceInterface = Set[
+DeviceInterface = [
   "AutoPlay_CustomEventGuid",
   "Autoplay_Silent",
   "ClassGuid",
@@ -457,24 +455,24 @@ DeviceInterface = Set[
   "UnrestrictedAppCapabilities"
 ]
 
-DeviceInterfaceClass = Set[
+DeviceInterfaceClass = [
   "DefaultInterface",
   "Inbox",
   "Name",
   "UnrestrictedAppCapabilities"
 ]
 
-DeviceItem = Set[
+DeviceItem = [
   "SetupProgress",
   "State",
   "Status"
 ]
 
-DeviceItemParam = Set[
+DeviceItemParam = [
   "AsyncItemInitDelaysEnumComplete"
 ]
 
-DeviceSetup = Set[
+DeviceSetup = [
   "AutoplayReady",
   "AutoplayState",
   "ConnectivityNeeded",
@@ -492,11 +490,11 @@ DeviceSetup = Set[
   "UXReady"
 ]
 
-DevQuery = Set[
+DevQuery = [
   "ObjectType"
 ]
 
-DriverDatabase = Set[
+DriverDatabase = [
   "AccessMask",
   "ConfigMode",
   "ConfigOptions",
@@ -514,21 +512,21 @@ DriverDatabase = Set[
   "Version"
 ]
 
-DriverFile = Set[
+DriverFile = [
   "DriverInfName",
   "Owners",
   "ProtectionClass",
   "SubDirectory"
 ]
 
-DriverInfFile = Set[
+DriverInfFile = [
   "ActiveConfigurations",
   "ActiveDriverPackage",
   "DriverPackages",
   "Locked"
 ]
 
-DriverPackage = Set[
+DriverPackage = [
   "BootCritical",
   "ClassGuid",
   "ClassVersion",
@@ -567,12 +565,12 @@ DriverPackage = Set[
   "TargetComputerIds"
 ]
 
-DriverRegKey = Set[
+DriverRegKey = [
   "KeyOnly",
   "Owners"
 ]
 
-DriverService = Set[
+DriverService = [
   "BootFlags",
   "Description",
   "DisplayName",
@@ -588,7 +586,7 @@ DriverService = Set[
   "Type"
 ]
 
-DrvPkg = Set[
+DrvPkg = [
   "BrandingIcon",
   "DetailedDescription",
   "DocumentationLink",
@@ -597,7 +595,7 @@ DrvPkg = Set[
   "VendorWebSite"
 ]
 
-FirmwareResource = Set[
+FirmwareResource = [
   "Id",
   "LastAttemptDate",
   "LastAttemptStatus",
@@ -608,21 +606,21 @@ FirmwareResource = Set[
   "Version"
 ]
 
-HdAudBus = Set[
+HdAudBus = [
   "DisableNonSnoop",
   "ForcedCacheType"
 ]
 
-Imaging = Set[
+Imaging = [
   "Port"
 ]
 
-InfraCast = Set[
+InfraCast = [
   "ChallengeAep",
   "DevnodeAep"
 ]
 
-IoT = Set[
+IoT = [
   "AllJoynSoftwareVersion",
   "AppId",
   "AppName",
@@ -635,7 +633,7 @@ IoT = Set[
   "SessionPort"
 ]
 
-IPP = Set[
+IPP = [
   "LocationListQuery",
   "LocationListResponse",
   "PrinterKeywordFilter",
@@ -648,25 +646,25 @@ IPP = Set[
   "PrinterTotalCount"
 ]
 
-KsAudio = Set[
+KsAudio = [
   "PacketSize_Constraints",
   "PacketSize_Constraints2"
 ]
 
-Mbae = Set[
+Mbae = [
   "NetworkAccountId",
   "NetworkInterfaceId"
 ]
 
-MTPBTH = Set[
+MTPBTH = [
   "IsConnected_Private"
 ]
 
-NFP = Set[
+NFP = [
   "Capabilities"
 ]
 
-PciDevice = Set[
+PciDevice = [
   "AcsCapabilityRegister",
   "AcsCompatibleUpHierarchy",
   "AcsSupport",
@@ -704,7 +702,7 @@ PciDevice = Set[
   "Uncorrectable_Error_Severity"
 ]
 
-PciRootBus = Set[
+PciRootBus = [
   "ASPMSupport",
   "ClockPowerManagementSupport",
   "CurrentSpeedAndMode",
@@ -725,7 +723,7 @@ PciRootBus = Set[
   "SystemMsiSupport"
 ]
 
-Pos = Set[
+Pos = [
   "ConnectionTypes",
   "DeviceConnectionString",
   "IsCustomPairing",
@@ -735,11 +733,11 @@ Pos = Set[
   "SetPairingState"
 ]
 
-PUBSVCS = Set[
+PUBSVCS = [
   "METADATA"
 ]
 
-Smartcard = Set[
+Smartcard = [
   "DeviceReady",
   "FileSystem",
   "Friendly",
@@ -748,23 +746,23 @@ Smartcard = Set[
   "VCard"
 ]
 
-SSDP = Set[
+SSDP = [
   "AltLocationInfo",
   "DevLifeTime",
   "NetworkLocationInfo"
 ]
 
-Storage = Set[
+Storage = [
   "Portable",
   "Removable_Media",
   "System_Critical"
 ]
 
-TSUSB = Set[
+TSUSB = [
   "BUS_ENUMERATOR_TAG"
 ]
 
-UPNP = Set[
+UPNP = [
   "AepServiceList",
   "FoundOnPublicNetwork",
   "IsDialDevice",
@@ -772,19 +770,19 @@ UPNP = Set[
   "WiFiDirectMacAddress"
 ]
 
-User = Set[
+User = [
   "Provided_Name"
 ]
 
-WIA = Set[
+WIA = [
   "DeviceType"
 ]
 
-WiFi = Set[
+WiFi = [
   "InterfaceGuid"
 ]
 
-WiFiDirect = Set[
+WiFiDirect = [
   "AutoConnect",
   "DeviceAddress",
   "DeviceAddressCopy",
@@ -811,7 +809,7 @@ WiFiDirect = Set[
   "SupportedChannelList"
 ]
 
-WiFiDirectParam = Set[
+WiFiDirectParam = [
   "DisableMiracastAutoProject",
   "DiscoverWSBDocks",
   "EnableAggressiveDiscovery",
@@ -820,7 +818,7 @@ WiFiDirectParam = Set[
   "ServiceInfoDiscovery"
 ]
 
-WiFiDirectServices = Set[
+WiFiDirectServices = [
   "AdvertisementId",
   "RequestServiceInformation",
   "ServiceAddress",
@@ -829,7 +827,7 @@ WiFiDirectServices = Set[
   "ServiceName"
 ]
 
-Winusb = Set[
+Winusb = [
   "Device_Class",
   "Device_Custom_Interface_GUIDs",
   "Device_PID",
@@ -838,11 +836,11 @@ Winusb = Set[
   "Device_VID"
 ]
 
-WpdFs = Set[
+WpdFs = [
   "VolumePath"
 ]
 
-WSD = Set[
+WSD = [
   "AepServiceList",
   "AppSeqInstanceID",
   "Challenge_Query",
@@ -854,65 +852,65 @@ WSD = Set[
   "WiFiDirectMacAddress"
 ]
 
-DEVPKEY_LIST = [
-  "Device",
-  "DeviceContainer",
-  "FirmwareResource",
-  "PciDevice",
-  "PciRootBus",
+DEVPKEY_LIST = {
+  "Device" => Device,
+  "DeviceContainer" => DeviceContainer,
+  "FirmwareResource" => FirmwareResource,
+  "PciDevice" => PciDevice,
+  "PciRootBus" => PciRootBus,
 
-  "Aep",
-  "AepContainer",
-  "AepService",
-  "Bluetooth",
-  "BluetoothLE",
-  "Bthhfenum",
-  "DasParam",
+  "Aep" => Aep,
+  "AepContainer" => AepContainer,
+  "AepService" => AepService,
+  "Bluetooth" => Bluetooth,
+  "BluetoothLE" => BluetoothLE,
+  "Bthhfenum" => Bthhfenum,
+  "DasParam" => DasParam,
   # ("Device", Device),
-  "DeviceClass",
+  "DeviceClass" => DeviceClass,
   # ("DeviceContainer", DeviceContainer),
-  "DeviceDisplay",
-  "DeviceId",
-  "DeviceInterface",
-  "DeviceInterfaceClass",
-  "DeviceItem",
-  "DeviceItemParam",
-  "DeviceSetup",
-  "DevQuery",
-  "DriverDatabase",
-  "DriverFile",
-  "DriverInfFile",
-  "DriverPackage",
-  "DriverRegKey",
-  "DriverService",
-  "DrvPkg",
+  "DeviceDisplay" => DeviceDisplay,
+  "DeviceId" => DeviceId,
+  "DeviceInterface" => DeviceInterface,
+  "DeviceInterfaceClass" => DeviceInterfaceClass,
+  "DeviceItem" => DeviceItem,
+  "DeviceItemParam" => DeviceItemParam,
+  "DeviceSetup" => DeviceSetup,
+  "DevQuery" => DevQuery,
+  "DriverDatabase" => DriverDatabase,
+  "DriverFile" => DriverFile,
+  "DriverInfFile" => DriverInfFile,
+  "DriverPackage" => DriverPackage,
+  "DriverRegKey" => DriverRegKey,
+  "DriverService" => DriverService,
+  "DrvPkg" => DrvPkg,
   # ("FirmwareResource", FirmwareResource),
-  "HdAudBus",
-  "Imaging",
-  "InfraCast",
-  "IoT",
-  "IPP",
-  "KsAudio",
-  "Mbae",
-  "MTPBTH",
-  "NFP",
+  "HdAudBus" => HdAudBus,
+  "Imaging" => Imaging,
+  "InfraCast" => InfraCast,
+  "IoT" => IoT,
+  "IPP" => IPP,
+  "KsAudio" => KsAudio,
+  "Mbae" => Mbae,
+  "MTPBTH" => MTPBTH,
+  "NFP" => NFP,
   # ("PciDevice", PciDevice),
   # ("PciRootBus", PciRootBus),
-  "Pos",
-  "PUBSVCS",
-  "Smartcard",
-  "SSDP",
-  "Storage",
-  "TSUSB",
-  "UPNP",
-  "User",
-  "WIA",
-  "WiFi",
-  "WiFiDirect",
-  "WiFiDirectParam",
-  "WiFiDirectServices",
-  "Winusb",
-  "WpdFs",
-  "WSD"
-]
+  "Pos" => Pos,
+  "PUBSVCS" => PUBSVCS,
+  "Smartcard" => Smartcard,
+  "SSDP" => SSDP,
+  "Storage" => Storage,
+  "TSUSB" => TSUSB,
+  "UPNP" => UPNP,
+  "User" => User,
+  "WIA" => WIA,
+  "WiFi" => WiFi,
+  "WiFiDirect" => WiFiDirect,
+  "WiFiDirectParam" => WiFiDirectParam,
+  "WiFiDirectServices" => WiFiDirectServices,
+  "Winusb" => Winusb,
+  "WpdFs" => WpdFs,
+  "WSD" => WSD
+}
 end
