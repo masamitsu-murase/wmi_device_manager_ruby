@@ -1,3 +1,4 @@
+[![Build Status](https://dev.azure.com/masamitsu-murase/wmi_device_manager_ruby/_apis/build/status/masamitsu-murase.wmi_device_manager_ruby?branchName=master)](https://dev.azure.com/masamitsu-murase/wmi_device_manager_ruby/_build/latest?definitionId=12&branchName=master)
 
 # WMI Device Manager
 
