@@ -1,0 +1,41 @@
+
+trigger:
+  branches:
+    include:
+    - '*'
+  tags:
+    include:
+    - '*'
+pr:
+  branches:
+    include:
+    - '*'
+jobs:
+- job: windows
+  displayName: Windows
+  pool:
+    vmImage: 'vs2017-win2016'
+  strategy:
+    matrix:
+      ruby23:
+        ruby_version: "2.3.x"
+      ruby24:
+        ruby_version: "2.4.x"
+      ruby25:
+        ruby_version: "2.5.x"
+      ruby26:
+        ruby_version: "2.6.x"
+  steps:
+  - script: git config --global core.autoCRLF false
+    displayName: "Disable git autoCRLF"
+  - checkout: self
+    displayName: "Checkout"
+    fetchDepth: 50
+  - task: UseRubyVersion@0
+    inputs:
+      versionSpec: '$(ruby_version)' 
+      addToPath: true
+  - script: bundle install
+    displayName: Bundle install
+  - script: bundle exec rake test
+    displayName: Test
