@@ -33,7 +33,7 @@ jobs:
     inputs:
       versionSpec: '$(ruby_version)' 
       addToPath: true
-  - script: gem install bundler
+  - script: gem install bundler -v 1.13
     displayName: Install Bundler
   - script: bundle install
     displayName: Install dependencies
