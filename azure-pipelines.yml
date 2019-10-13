@@ -17,8 +17,6 @@ jobs:
     vmImage: 'vs2017-win2016'
   strategy:
     matrix:
-      ruby23:
-        ruby_version: "2.3.x"
       ruby24:
         ruby_version: "2.4.x"
       ruby25:
@@ -35,7 +33,9 @@ jobs:
     inputs:
       versionSpec: '$(ruby_version)' 
       addToPath: true
+  - script: gem install bundler
+    displayName: Install Bundler
   - script: bundle install
-    displayName: Bundle install
+    displayName: Install dependencies
   - script: bundle exec rake test
     displayName: Test
