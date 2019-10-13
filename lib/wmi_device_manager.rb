@@ -1,5 +1,6 @@
 
 require("win32ole")
+require("wmi_device_manager/version")
 require("wmi_device_manager/device_manager")
 require("wmi_device_manager/win32pnpentity")
 require("wmi_device_manager/const")
