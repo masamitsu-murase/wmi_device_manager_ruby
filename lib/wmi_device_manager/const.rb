@@ -1,3 +1,4 @@
+module WmiDeviceManager
 Aep = [
     "AepId",
     "AssociationRetryCount",
@@ -1041,3 +1042,4 @@ DEVPKEY_LIST = {
     "WpdFs" => WpdFs,
 }
 
+end

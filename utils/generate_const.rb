@@ -29,7 +29,7 @@ def output_const(key_tree)
     "PciRootBus",
   ]
 
-  output = ""
+  output = "module WmiDeviceManager\n"
   key_tree.keys.sort.each do |key|
     set = key_tree[key]
     output += "#{key} = [\n"
@@ -55,6 +55,7 @@ def output_const(key_tree)
     end
   end
   output += "}\n\n"
+  output += "end\n"
 
   return output
 end
