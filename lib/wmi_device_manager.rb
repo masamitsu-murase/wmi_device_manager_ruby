@@ -1,12 +1,13 @@
 
 require("win32ole")
+require("wmi_device_manager/version")
 require("wmi_device_manager/device_manager")
 require("wmi_device_manager/win32pnpentity")
 require("wmi_device_manager/const")
 
 module WmiDeviceManager
     def self.wrap_raw_wmi_object(obj)
-        if obj.class == Array
+        if obj.kind_of? Array
             return obj.map{ |i| wrap_raw_wmi_object(i) }
         end
 

@@ -3,6 +3,24 @@ require("win32ole")
 
 module WmiDeviceManager
     class Win32PnpEntity
+        def self.construct_long_name
+            long_name_hash = {}
+            DEVPKEY_LIST.each do |name, values|
+                values.each do |value|
+                    long_name = "DEVPKEY_#{name}_#{value}"
+                    [value, "#{name}_#{value}", "DEVPKEY_#{name}_#{value}"].each do |short_name|
+                        long_name_hash[short_name] = long_name unless long_name_hash.key? short_name
+                    end
+                end
+            end
+            return long_name_hash
+        end
+
+        def self.const_long_name
+            @long_name ||= construct_long_name
+            return @long_name
+        end
+
         def initialize(wmi_object)
             @wmi_object = wmi_object
             @parent = nil
@@ -32,22 +50,8 @@ module WmiDeviceManager
                 return WmiDeviceManager.wrap_raw_wmi_object(@wmi_object.Properties_.Item(name).Value)
             elsif @methods_list.include? name
                 return call_method(name, args)
-            else
-                const_list = DEVPKEY_LIST
-                prop_value = nil
-                const_list.each do |const_name|
-                    const_value = WmiDeviceManager.const_get(const_name)
-                    if const_value.include?(name)
-                        prop_value = self.GetDeviceProperties(["DEVPKEY_#{const_name}_#{name}"]).deviceProperties[0]
-                        break
-                    elsif name.start_with?("#{const_name}_") && const_value.include?(name[(const_name.size + 1) .. -1])
-                        prop_value = self.GetDeviceProperties(["DEVPKEY_#{name}"]).deviceProperties[0]
-                        break
-                    elsif name.start_with?("DEVPKEY_#{const_name}_") && const_value.include?(name[(8 + const_name.size + 1) .. -1])
-                        prop_value = self.GetDeviceProperties([name]).deviceProperties[0]
-                        break
-                    end
-                end
+            elsif Win32PnpEntity.const_long_name.key? name
+                prop_value = self.GetDeviceProperties([Win32PnpEntity.const_long_name[name]]).deviceProperties[0]
                 if prop_value
                     return prop_value.Type == 0 ? nil : prop_value.Data
                 end
